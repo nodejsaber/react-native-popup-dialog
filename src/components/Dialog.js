@@ -7,8 +7,10 @@ import Overlay from './Overlay';
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
 const propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
+  minWidth: PropTypes.number,
+  maxWidth: PropTypes.number,
+  minHeight: PropTypes.number,
+  maxHeight: PropTypes.number,
   haveOverlay: PropTypes.bool,
   overlayPointerEvents: PropTypes.string,
   overlayBackgroundColor: PropTypes.string,
@@ -26,8 +28,10 @@ const propTypes = {
 
 const defaultProps = {
   animationDuration: 200,
-  width: WIDTH,
-  height: 300,
+  minWidth: WIDTH,
+  maxWidth: WIDTH,
+  minHeight: 0.4,
+  maxHeight: 0.4,
   closeOnTouchOutside: true,
   haveOverlay: true,
 };
@@ -81,15 +85,20 @@ class Dialog extends Component {
     }, this.props.animationDuration);
   }
 
-  calculateDialogSize({ width, height }): Object {
-    const size = { width, height };
-    if (width > 0.0 && width < 1.0) {
-      size.width = width * WIDTH;
-    }
-    if (height > 0.0 && height < 1.0) {
-      size.height = height * HEIGHT;
-    }
-    return size;
+  calculateDialogSize({ minWidth, maxWidth, minHeight, maxHeight }): Object {
+    const dialogSize = { minWidth, maxWidth, minHeight, maxHeight };
+
+    Object.keys(dialogSize).forEach((s) => {
+      if (dialogSize[s] > 0.0 && dialogSize[s] < 1.0) {
+        if (s.toLowerCase().includes('width')) {
+          dialogSize[s] *= WIDTH;
+        } else {
+          dialogSize[s] *= HEIGHT;
+        }
+      }
+    });
+
+    return dialogSize;
   }
 
   open(onOpened = this.props.onOpened) {
@@ -118,11 +127,11 @@ class Dialog extends Component {
     if (dialogState === 'closed') {
       hidden = styles.hidden;
     } else {
-      const size = this.calculateDialogSize(this.props);
+      const dialogSize = this.calculateDialogSize(this.props);
       dialog = (
         <Animated.View
           style={[
-            styles.dialog, size, this.props.dialogStyle, this.props.dialogAnimation.animations,
+            styles.dialog, dialogSize, this.props.dialogStyle, this.props.dialogAnimation.animations,
           ]}
         >
           {this.props.children}
