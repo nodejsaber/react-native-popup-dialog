@@ -31,7 +31,7 @@ const defaultProps = {
   minWidth: WIDTH,
   maxWidth: WIDTH,
   minHeight: 0.4,
-  maxHeight: 0.4,
+  maxHeight: 1.0,
   closeOnTouchOutside: true,
   haveOverlay: true,
 };

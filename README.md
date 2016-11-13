@@ -100,7 +100,7 @@ import PopupDialog, { DialogTitle } from 'react-native-popup-dialog';
 | `minWidth` | `Number` or `null` | Your device width | The Min Width of Dialog, you can use fixed width or use percentage
 | `maxWidth` | `Number` or `null` | Your device width | The Max Width of Dialog, you can use fixed width or use percentage
 | `minHeight` | `Number` or `null` | 0.4 | The Min Width of Dialog, you can use fixed height or use percentage
-| `maxHeight` | `Number` or `null` | 0.4 | The Max Width of Dialog, you can use fixed height or use percentage
+| `maxHeight` | `Number` or `null` | 1.0 | The Max Width of Dialog, you can use fixed height or use percentage
 | `dialogAnimation` |  | `DefaultAnimation` | animation for dialog | |
 | `dialogStyle` | `Object` or `Number` | | | |
 | `animationDuration` | `Number` | `200` | | |
