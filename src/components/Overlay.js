@@ -1,11 +1,28 @@
-// flow
+// @flow
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Dimensions, TouchableOpacity, Animated } from 'react-native';
 
-const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
+type Props = {
+  onPress: Function;
+  backgroundColor: string;
+  opacity: number;
+  animationDuration: number;
+  showOverlay: bool;
+  pointerEvents: string;
+}
+
+const DefaultProps = {
+  backgroundColor: '#000',
+  opacity: 0.5,
+  animationDuration: 200,
+  showOverlay: false,
+};
 
 class Overlay extends Component {
+  props: Props;
+  static defaultProps = DefaultProps;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,42 +44,27 @@ class Overlay extends Component {
     const { onPress, pointerEvents } = this.props;
     const backgroundColor = { backgroundColor: this.props.backgroundColor };
     const opacity = { opacity: this.state.opacity };
+    const dimensions = {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
+    };
 
     return (
       <Animated.View
         pointerEvents={pointerEvents}
-        style={[styles.overlay, backgroundColor, opacity]}
+        style={[styles.overlay, backgroundColor, opacity, dimensions]}
       >
-        <TouchableOpacity onPress={onPress} style={[styles.overlay]} />
+        <TouchableOpacity onPress={onPress} style={[styles.overlay, dimensions]} />
       </Animated.View>
     );
   }
 }
-
-
-Overlay.propTypes = {
-  onPress: PropTypes.func,
-  backgroundColor: PropTypes.string,
-  opacity: PropTypes.number,
-  animationDuration: PropTypes.number,
-  showOverlay: PropTypes.bool,
-  pointerEvents: PropTypes.string,
-};
-
-Overlay.defaultProps = {
-  backgroundColor: '#000',
-  opacity: 0.5,
-  animationDuration: 200,
-  showOverlay: false,
-};
 
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     top: 0,
     left: 0,
-    width: WIDTH,
-    height: HEIGHT,
     position: 'absolute',
   },
 });

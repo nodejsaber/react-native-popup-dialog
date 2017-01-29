@@ -1,12 +1,15 @@
 /* @flow */
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet, Animated, Dimensions } from 'react-native';
 import Overlay from './Overlay';
+import DefaultAnimation from '../animations/DefaultAnimation';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
 const propTypes = {
+  width: number;
+  height: number;
   minWidth: PropTypes.number,
   maxWidth: PropTypes.number,
   minHeight: PropTypes.number,
@@ -28,17 +31,17 @@ const propTypes = {
 
 const defaultProps = {
   animationDuration: 200,
-  minWidth: WIDTH,
-  maxWidth: WIDTH,
+  minWidth: 0.4,
   minHeight: 0.4,
   maxHeight: 1.0,
+  dialogAnimation: new DefaultAnimation({ animationDuration: 150 }),
   closeOnTouchOutside: true,
   haveOverlay: true,
 };
 
 class Dialog extends Component {
-  static propTypes = propTypes
-  static defaultProps = defaultProps
+  props: Props;
+  static defaultProps = defaultProps;
 
   constructor(props) {
     super(props);
@@ -123,6 +126,10 @@ class Dialog extends Component {
     const dialogState = this.state.dialogState;
     const overlayPointerEvents = this.pointerEvents;
     const isShowOverlay = (['opened', 'opening'].includes(dialogState) && this.props.haveOverlay);
+    const dimensions = {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
+    };
 
     if (dialogState === 'closed') {
       hidden = styles.hidden;
@@ -141,7 +148,7 @@ class Dialog extends Component {
     }
 
     return (
-      <View style={[styles.container, hidden]}>
+      <View style={[styles.container, hidden, dimensions]}>
         <Overlay
           pointerEvents={overlayPointerEvents}
           showOverlay={isShowOverlay}
@@ -162,8 +169,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: WIDTH,
-    height: HEIGHT,
     justifyContent: 'center',
     alignItems: 'center',
   },
