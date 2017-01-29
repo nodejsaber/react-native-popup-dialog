@@ -106,6 +106,8 @@ import PopupDialog, { DialogTitle } from 'react-native-popup-dialog';
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | `dialogTitle` | `React Element` | | You can pass a `DialogTitle` component or pass a `View` for customizing titlebar |
+| `width` | `Number` or `null` | |
+| `height` | `Number` or `null` | | 
 | `minWidth` | `Number` or `null` | Your device width | The Min Width of Dialog, you can use fixed width or use percentage
 | `maxWidth` | `Number` or `null` | Your device width | The Max Width of Dialog, you can use fixed width or use percentage
 | `minHeight` | `Number` or `null` | 0.4 | The Min Width of Dialog, you can use fixed height or use percentage
