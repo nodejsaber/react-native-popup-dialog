@@ -7,26 +7,26 @@ import DefaultAnimation from '../animations/DefaultAnimation';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
-const propTypes = {
+type Props = {
   width: number;
   height: number;
-  minWidth: PropTypes.number,
-  maxWidth: PropTypes.number,
-  minHeight: PropTypes.number,
-  maxHeight: PropTypes.number,
-  haveOverlay: PropTypes.bool,
-  overlayPointerEvents: PropTypes.string,
-  overlayBackgroundColor: PropTypes.string,
-  overlayOpacity: PropTypes.number,
-  dialogAnimation: PropTypes.object,
-  dialogStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
-  animationDuration: PropTypes.number,
-  closeOnTouchOutside: PropTypes.bool,
-  open: PropTypes.bool,
-  onOpened: PropTypes.func,
-  onClosed: PropTypes.func,
-  actions: PropTypes.array,
-  children: PropTypes.any,
+  minWidth: number;
+  maxWidth: number;
+  minHeight: number;
+  maxHeight: number;
+  haveOverlay: bool;
+  overlayPointerEvents: string;
+  overlayBackgroundColor: string;
+  overlayOpacity: number;
+  dialogAnimation: Object;
+  dialogStyle: Object | number;
+  animationDuration: number;
+  closeOnTouchOutside: bool;
+  open: bool;
+  onOpened: Function;
+  onClosed: Function;
+  actions: Array;
+  children: any;
 };
 
 const defaultProps = {
