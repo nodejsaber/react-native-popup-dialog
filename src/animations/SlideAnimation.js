@@ -9,8 +9,12 @@ type Param = {
 }
 
 export default class SlideAnimation extends Animation {
-  constructor({ toValue = 0, slideFrom = 'bottom' }: Param) {
-    super(toValue);
+  constructor({
+    toValue = 0,
+    slideFrom = 'bottom',
+    useNativeDriver = false,
+  }: Param) {
+    super(toValue, useNativeDriver);
     this.animations = this.createAnimations(slideFrom);
   }
 
@@ -20,6 +24,7 @@ export default class SlideAnimation extends Animation {
       velocity: 0,
       tension: 65,
       friction: 10,
+      useNativeDriver: this.useNativeDriver,
     }).start(onFinished);
   }
 
