@@ -40,6 +40,7 @@ class Overlay extends Component {
       Animated.timing(this.state.opacity, {
         toValue,
         duration: this.props.animationDuration,
+        useNativeDriver: true,
       }).start();
     }
   }
