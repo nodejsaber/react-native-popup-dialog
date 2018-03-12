@@ -168,7 +168,7 @@ class Dialog extends Component {
   props: DialogType
 
   render() {
-    const dialogState = this.state.dialogState;
+    const { dialogState } = this.state;
     const hidden = dialogState === DIALOG_CLOSED && styles.hidden;
     const isShowOverlay = (
       [DIALOG_OPENING, DIALOG_OPENED].includes(dialogState) && this.props.haveOverlay

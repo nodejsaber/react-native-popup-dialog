@@ -1,10 +1,12 @@
 // @flow
 
-import React, { Component } from 'react';
-import { StyleSheet,
+import React, { PureComponent } from 'react';
+import {
+  StyleSheet,
   Dimensions,
   TouchableWithoutFeedback,
   Animated,
+  View,
 } from 'react-native';
 import type { OverlayType } from '../type';
 
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class Overlay extends Component {
+class Overlay extends PureComponent {
   static defaultProps = {
     backgroundColor: BACKGROUND_COLOR,
     opacity: OPACITY,
@@ -36,37 +38,42 @@ class Overlay extends Component {
     this.opacity = new Animated.Value(0);
   }
 
-  componentWillReceiveProps(nextProps: OverlayType) {
-    if (this.props.showOverlay !== nextProps.showOverlay) {
-      const toValue = nextProps.showOverlay ? nextProps.opacity : 0;
+
+  componentDidUpdate(prevProps) {
+    const { showOverlay, opacity, animationDuration } = this.props;
+    if (showOverlay !== prevProps.showOverlay) {
+      const toValue = showOverlay ? opacity : 0;
       Animated.timing(this.opacity, {
         toValue,
-        duration: this.props.animationDuration,
+        duration: animationDuration,
         useNativeDriver: true,
       }).start();
     }
   }
+  // componentWillReceiveProps(nextProps: OverlayType) {
+  // }
 
   props: OverlayType
 
   render() {
-    const { onPress, pointerEvents } = this.props;
+    const { onPress, pointerEvents, backgroundColor } = this.props;
     const style = {
-      backgroundColor: this.props.backgroundColor,
+      backgroundColor,
       opacity: this.opacity,
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
     };
 
     return (
-      <TouchableWithoutFeedback onPress={onPress}>
-        <Animated.View
-          pointerEvents={pointerEvents}
-          style={[styles.overlay, style]}
-        >
-          {/* <TouchableOpacity  style={[styles.overlay, style]} /> */}
-        </Animated.View>
-      </TouchableWithoutFeedback>
+      <View
+        pointerEvents={pointerEvents}
+      >
+        <TouchableWithoutFeedback onPress={onPress}>
+          <Animated.View
+            style={[styles.overlay, style]}
+          />
+        </TouchableWithoutFeedback>
+      </View>
     );
   }
 }
