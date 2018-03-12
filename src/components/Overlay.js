@@ -40,7 +40,7 @@ class Overlay extends PureComponent {
 
     const _opacity = animate ? animate.interpolate({
       inputRange: [0, 1],
-      outputRange: [this.props.opacity, 0],
+      outputRange: [0, this.props.opacity],
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     }) : 0;
