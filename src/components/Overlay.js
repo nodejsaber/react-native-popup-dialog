@@ -1,7 +1,11 @@
 // @flow
 
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, TouchableOpacity, Animated } from 'react-native';
+import { StyleSheet,
+  Dimensions,
+  TouchableWithoutFeedback,
+  Animated,
+} from 'react-native';
 import type { OverlayType } from '../type';
 
 // default overlay options
@@ -29,15 +33,13 @@ class Overlay extends Component {
 
   constructor(props: OverlayType) {
     super(props);
-    this.state = {
-      opacity: new Animated.Value(0),
-    };
+    this.opacity = new Animated.Value(0);
   }
 
   componentWillReceiveProps(nextProps: OverlayType) {
     if (this.props.showOverlay !== nextProps.showOverlay) {
       const toValue = nextProps.showOverlay ? nextProps.opacity : 0;
-      Animated.timing(this.state.opacity, {
+      Animated.timing(this.opacity, {
         toValue,
         duration: this.props.animationDuration,
         useNativeDriver: true,
@@ -49,20 +51,22 @@ class Overlay extends Component {
 
   render() {
     const { onPress, pointerEvents } = this.props;
-    const backgroundColor = { backgroundColor: this.props.backgroundColor };
-    const opacity = { opacity: this.state.opacity };
-    const dimensions = {
+    const style = {
+      backgroundColor: this.props.backgroundColor,
+      opacity: this.opacity,
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
     };
 
     return (
-      <Animated.View
-        pointerEvents={pointerEvents}
-        style={[styles.overlay, backgroundColor, opacity, dimensions]}
-      >
-        <TouchableOpacity onPress={onPress} style={[styles.overlay, dimensions]} />
-      </Animated.View>
+      <TouchableWithoutFeedback onPress={onPress}>
+        <Animated.View
+          pointerEvents={pointerEvents}
+          style={[styles.overlay, style]}
+        >
+          {/* <TouchableOpacity  style={[styles.overlay, style]} /> */}
+        </Animated.View>
+      </TouchableWithoutFeedback>
     );
   }
 }
