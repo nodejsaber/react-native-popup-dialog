@@ -13,8 +13,6 @@ import type { OverlayType } from '../type';
 // default overlay options
 const BACKGROUND_COLOR: string = '#000';
 const OPACITY: number = 0.5;
-const ANIMATION_DURATION: number = 2000;
-const SHOW_OVERLAY: boolean = false;
 
 const styles = StyleSheet.create({
   overlay: {
@@ -26,40 +24,30 @@ const styles = StyleSheet.create({
 });
 
 class Overlay extends PureComponent {
+  static props: OverlayType
+
   static defaultProps = {
     backgroundColor: BACKGROUND_COLOR,
     opacity: OPACITY,
-    animationDuration: ANIMATION_DURATION,
-    showOverlay: SHOW_OVERLAY,
+    animate: undefined,
   };
 
-  constructor(props: OverlayType) {
-    super(props);
-    this.opacity = new Animated.Value(0);
-  }
-
-
-  componentDidUpdate(prevProps) {
-    const { showOverlay, opacity, animationDuration } = this.props;
-    if (showOverlay !== prevProps.showOverlay) {
-      const toValue = showOverlay ? opacity : 0;
-      Animated.timing(this.opacity, {
-        toValue,
-        duration: animationDuration,
-        useNativeDriver: true,
-      }).start();
-    }
-  }
-  // componentWillReceiveProps(nextProps: OverlayType) {
-  // }
-
-  props: OverlayType
 
   render() {
-    const { onPress, pointerEvents, backgroundColor } = this.props;
+    const {
+      onPress, pointerEvents, backgroundColor, animate,
+    } = this.props;
+
+    const _opacity = animate ? animate.interpolate({
+      inputRange: [0, 1],
+      outputRange: [this.props.opacity, 0],
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    }) : 0;
+
     const style = {
       backgroundColor,
-      opacity: this.opacity,
+      opacity: _opacity,
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
     };

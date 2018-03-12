@@ -48,7 +48,6 @@ export type OverlayType = {
   onPress: Function;
   backgroundColor?: string;
   opacity?: number;
-  animationDuration?: number;
-  showOverlay?: boolean;
   pointerEvents?: string;
+  animate: any;
 }
