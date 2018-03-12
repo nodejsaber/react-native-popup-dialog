@@ -34,7 +34,9 @@ const styles = StyleSheet.create({
 });
 
 /* eslint max-len: [0] */
-function DialogButton({ text, activeOpacity, disabled, align, onPress, buttonStyle, textStyle, textContainerStyle }: DialogButtonType) {
+function DialogButton({
+  text, activeOpacity, disabled, align, onPress, buttonStyle, textStyle, textContainerStyle,
+}: DialogButtonType) {
   const buttonAlign = { alignSelf: Positions[align] };
   const disabledText = disabled ? styles.disabledText : null;
 

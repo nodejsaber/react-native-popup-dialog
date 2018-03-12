@@ -32,10 +32,6 @@ class Overlay extends PureComponent {
     animate: undefined,
   };
 
-  componentWillMount() {
-    this.props.animate && this.props.animate.addListener(value => console.log(value)); //eslint-disable-line
-  }
-
 
   render() {
     const {

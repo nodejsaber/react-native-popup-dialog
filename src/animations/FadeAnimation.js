@@ -12,8 +12,12 @@ export default class FadeAnimation extends Animation {
   animate: Object
   animationDuration: number
 
-  constructor({ toValue = 0, animationDuration = 200 }: Param) {
-    super(toValue);
+  constructor({
+    toValue = 0,
+    animationDuration = 200,
+    useNativeDriver = false,
+  }: Param) {
+    super(toValue, useNativeDriver);
 
     this.animationDuration = animationDuration;
   }
@@ -22,6 +26,7 @@ export default class FadeAnimation extends Animation {
     Animated.timing(this.animate, {
       toValue,
       duration: this.animationDuration,
+      useNativeDriver: this.useNativeDriver,
     }).start();
   }
 

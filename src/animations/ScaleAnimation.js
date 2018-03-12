@@ -12,6 +12,7 @@ export default class ScaleAnimation extends Animation {
           velocity: 3,
           tension: 250,
           friction: 20,
+          useNativeDriver: this.useNativeDriver,
         }).start(onFinished);
         break;
       case 1:
@@ -20,6 +21,7 @@ export default class ScaleAnimation extends Animation {
           velocity: 0,
           tension: 65,
           friction: 7,
+          useNativeDriver: this.useNativeDriver,
         }).start(onFinished);
         break;
       default:
