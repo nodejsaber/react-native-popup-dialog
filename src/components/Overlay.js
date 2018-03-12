@@ -65,15 +65,14 @@ class Overlay extends PureComponent {
     };
 
     return (
-      <View
+      <Animated.View
         pointerEvents={pointerEvents}
+        style={[styles.overlay, style]}
       >
         <TouchableWithoutFeedback onPress={onPress}>
-          <Animated.View
-            style={[styles.overlay, style]}
-          />
+          <View style={StyleSheet.absoluteFill} />
         </TouchableWithoutFeedback>
-      </View>
+      </Animated.View>
     );
   }
 }
