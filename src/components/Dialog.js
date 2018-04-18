@@ -35,10 +35,7 @@ const HARDWARE_BACK_PRESS_EVENT: string = 'hardwareBackPress';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    position: 'absolute',
-    top: 0,
-    left: 0,
+    ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1000,
@@ -173,11 +170,9 @@ class Dialog extends Component {
     // const isShowOverlay = (
     //   [DIALOG_OPENING, DIALOG_OPENED].includes(dialogState) && this.props.haveOverlay
     // );
-    const { width, height } = Dimensions.get('window');
-    const containerSize = { width, height };
 
     return (
-      <View style={[styles.container, hidden, containerSize, this.props.containerStyle]}>
+      <View style={[styles.container, hidden, this.props.containerStyle]}>
 
         {
           this.props.haveOverlay &&
