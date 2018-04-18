@@ -48,8 +48,8 @@ class Overlay extends PureComponent {
     const style = {
       backgroundColor,
       opacity: _opacity,
-      width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height,
+      // width: Dimensions.get('window').width,
+      // height: Dimensions.get('window').height,
     };
 
     return (
