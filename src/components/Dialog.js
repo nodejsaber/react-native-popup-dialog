@@ -179,7 +179,8 @@ class Dialog extends Component {
     return (
       <View style={[styles.container, hidden, containerSize, this.props.containerStyle]}>
 
-        { this.props.haveOverlay &&
+        {
+          this.props.haveOverlay &&
           <Overlay
             animate={this.props.dialogAnimation.animate}
             backgroundColor={this.props.overlayBackgroundColor}

@@ -14,15 +14,6 @@ import type { OverlayType } from '../type';
 const BACKGROUND_COLOR: string = '#000';
 const OPACITY: number = 0.5;
 
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    top: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
-
 class Overlay extends PureComponent {
   static props: OverlayType
 
@@ -55,7 +46,7 @@ class Overlay extends PureComponent {
     return (
       <Animated.View
         pointerEvents={pointerEvents}
-        style={[styles.overlay, style]}
+        style={[StyleSheet.absoluteFill, style]}
       >
         <TouchableWithoutFeedback onPress={onPress}>
           <View style={StyleSheet.absoluteFill} />
