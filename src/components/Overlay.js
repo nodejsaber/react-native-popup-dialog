@@ -3,7 +3,6 @@
 import React, { PureComponent } from 'react';
 import {
   StyleSheet,
-  Dimensions,
   TouchableWithoutFeedback,
   Animated,
   View,
